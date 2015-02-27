@@ -14,7 +14,7 @@ best<- function(state, outcome){
               col_id<- 23} else{
               stop("Invalid Outcome")}}}
   #Step3: Subset the required information and identify the row index for minimimum
-  table<- subset(package, package[,col_id] & package$State==state)
+  table<- subset(package, package[,col_id]!=="Not Available" & package$State==state)
   #Step4: Order the results by hospital name
   order_table<- table[order(table[,1])]
   #Step5: Return the minimum rate
