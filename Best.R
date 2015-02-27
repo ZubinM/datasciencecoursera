@@ -17,10 +17,9 @@ best<- function(state, outcome){
   table<- subset(package, package[,col_id]!=="Not Available" & package$State==state)
   #Step4: Order the results by hospital name
   order_table<- table[order(table[,col_id], table[,1])]
-  #Step5: Return the minimum rate
-  results_row<- which(order_table[,col_id] == min(as.numeric(order_table[,col_id])))
-  results<- order_table[results_row, 1]
-  print(results)
+  #Step5: Return the minimum rate or first in list
+order_table[1,1]
+}
 
 Compare with:
 best <- function(state, outcome) {
