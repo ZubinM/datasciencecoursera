@@ -1,4 +1,4 @@
-rankhospital<- function(state, outcome){
+rankhospital<- function(state, outcome, num){
   package<- read.csv("~/Desktop/data/outcome-of-care-measures.csv", colClasses="character")
   #Step1: Read the file and assign name
   #Step2: Test validity of state entry and outcome entries
@@ -14,8 +14,9 @@ rankhospital<- function(state, outcome){
   #Step3: Subset the required information and identify the row index for minimimum
   table<- subset(package, package[,col_id]!=="Not Available" & package$State==state)
   #Step4: Order the results by hospital name
-  order_table<- table[order(table[,1])]
-  #Step5: Return the minimum rate
+  order_table<- table[order(table[,col_id],table[,1])]
+  #Step5: Return the desired rate
+  max_rows<- nrow(order_table)
   results_row<- which(order_table[,col_id] == min(as.numeric(order_table[,col_id])))
   results<- order_table[results_row, 1]
   print(results)
