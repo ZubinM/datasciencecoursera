@@ -1,0 +1,26 @@
+#Function Best for Assignment 3
+
+best<- function(state, outcome){
+  package<- read.csv("~/Desktop/data/outcome-of-care-measures.csv", colClasses="character")
+  #Step1: Read the file and assign name
+  #Step2: Test validity of state entry and outcome entries
+  if(!any(state==package$State)){
+      stop("Invalid State")}
+  if(outcome=="heart attack"){
+      col_id<- 11} else {
+        if(outcome=="heart failure"){
+          col_id<- 17} else{
+            if(outcome=="pneumonia"){
+              col_id<- 23} else{
+              stop("Invalid Outcome")}}}
+  #Step3: Subset the required information and identify the row index for minimimum
+  table<- subset(package, package[,col_id] & package$State==state)
+  #Step4: Order the results by hospital name
+  order_table<- table[order(table[,1])]
+  #Step5: Return the minimum rate
+  results_row<- which(order_table == min(order_table[,1]))
+  results<- order_table[results_row, 1]
+  print(results)
+  
+  
+  
