@@ -13,15 +13,16 @@ rankhospital <- function(state, outcome, num){
               stop("Invalid Outcome")}}}
   #Step3: Subset the required information and identify the row index for minimimum
   table<- subset(package, package[,col_id]!=="Not Available" & package$State==state)
+  table[,col_id]<- as.numeric(x=table[,col_id])
   #Step4: Order the results by hospital name
   order_table<- table[order(table[,col_id], table[,1])]
   max_rows<- nrow(order_table)
   #Step5: Return the minimum rate or number for it
-  if(num = "best"){
+  if(num == "best"){
     r_id<- 1} else {
-      if(num = "worst"){
+      if(num == "worst"){
         r_id<- max_rows} else {
-          if(num>max_rows){
+          if(num<1 || num>max_rows){
             print("NA")} else{
                 order_table[r_id,1]}}}
 }
